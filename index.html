@@ -7,20 +7,45 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
   <style>
+    /* Typing effect */
     .typing { border-right: 2px solid white; white-space: nowrap; overflow: hidden; animation: typing 3s steps(30, end), blink 0.6s infinite; }
     @keyframes typing { from { width: 0 } to { width: 100% } }
     @keyframes blink { 50% { border-color: transparent } }
+
+    /* Scroll animations */
     .fade-in { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
     .zoom-in { opacity: 0; transform: scale(0.9); transition: all 1s ease; }
     .zoom-in.visible { opacity: 1; transform: scale(1); }
+
+    /* Modal */
+    .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); }
+    .modal-content { margin: 10% auto; display: block; width: 80%; max-width: 800px; }
+    .close { position: absolute; top: 20px; right: 40px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
+    .modal-content iframe { width: 100%; height: 80vh; border: none; }
+
+    /* Skill bar animation */
+    .skill-bar { width: 0%; height: 1rem; background-color: white; border-radius: 0.25rem; transition: width 1.5s ease-in-out; }
+
+    /* Gradient background for hero */
+    @keyframes gradientBackground {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .animate-gradientBackground {
+      background: linear-gradient(270deg, #6B46C1, #D53F8C, #ED64A6);
+      background-size: 400% 400%;
+      animation: gradientBackground 15s ease infinite;
+    }
   </style>
 </head>
 <body class="bg-black text-white font-sans">
 
   <!-- Hero Section -->
-  <section class="h-screen flex flex-col items-center justify-center text-center bg-black text-white animate__animated animate__fadeIn relative">
-    <div id="animeBoy" class="absolute bottom-0 right-10 w-40"></div>
+  <section class="h-screen flex flex-col items-center justify-center text-center relative overflow-hidden">
+    <div class="absolute inset-0 animate-gradientBackground -z-10"></div>
+    <div id="animeBoy" class="absolute bottom-0 right-10 w-40 animate__animated animate__bounceIn"></div>
     <h1 class="text-6xl font-extrabold mb-4">Hi, I’m <span class="text-gray-400">K M VENKATACHALAM</span></h1>
     <p class="text-2xl mb-6 typing">Freelance Web Designer</p>
     <a href="#projects" class="px-8 py-3 bg-white text-black font-semibold rounded-lg shadow-lg hover:shadow-white/50 hover:scale-110 transition">View My Work</a>
@@ -37,13 +62,31 @@
   <!-- Skills Section -->
   <section id="skills" class="py-20 bg-gray-900 px-6 fade-in">
     <h2 class="text-4xl font-bold mb-6 text-center">Skills</h2>
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center">
-      <div class="p-6 bg-black border border-gray-700 rounded-lg hover:scale-110 hover:shadow-white/40 transition">HTML</div>
-      <div class="p-6 bg-black border border-gray-700 rounded-lg hover:scale-110 hover:shadow-white/40 transition">CSS</div>
-      <div class="p-6 bg-black border border-gray-700 rounded-lg hover:scale-110 hover:shadow-white/40 transition">JavaScript</div>
-      <div class="p-6 bg-black border border-gray-700 rounded-lg hover:scale-110 hover:shadow-white/40 transition">Tailwind</div>
-      <div class="p-6 bg-black border border-gray-700 rounded-lg hover:scale-110 hover:shadow-white/40 transition">React</div>
-      <div class="p-6 bg-black border border-gray-700 rounded-lg hover:scale-110 hover:shadow-white/40 transition">UI/UX</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+      <div>
+        <span>HTML</span>
+        <div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="95%"></div></div>
+      </div>
+      <div>
+        <span>CSS</span>
+        <div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="90%"></div></div>
+      </div>
+      <div>
+        <span>JavaScript</span>
+        <div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="85%"></div></div>
+      </div>
+      <div>
+        <span>Tailwind</span>
+        <div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="80%"></div></div>
+      </div>
+      <div>
+        <span>React</span>
+        <div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="75%"></div></div>
+      </div>
+      <div>
+        <span>UI/UX</span>
+        <div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="85%"></div></div>
+      </div>
     </div>
   </section>
 
@@ -51,27 +94,52 @@
   <section id="projects" class="py-20 px-6 max-w-6xl mx-auto zoom-in">
     <h2 class="text-4xl font-bold mb-6 text-center">Projects</h2>
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-gray-900 border border-gray-700 rounded-lg overflow-hidden hover:scale-105 hover:shadow-xl hover:shadow-white/20 transition">
-        <img src="project1.png" alt="Portfolio Screenshot" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-semibold">Portfolio Website</h3>
-          <p class="text-gray-400 mt-2">Minimal black & white portfolio with animations.</p>
+
+      <!-- Project 1 - Portfolio -->
+      <div class="relative group overflow-hidden rounded-lg border border-gray-700 bg-gray-900">
+        <img src="assets/Screenshot 2025-10-02 114425.png" alt="Portfolio Website Screenshot" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
+        <div class="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+          <div class="text-center text-white px-4">
+            <h3 class="text-xl font-semibold">Portfolio Website</h3>
+            <p class="mt-2">Minimal black & white portfolio with animations.</p>
+            <div class="mt-4 flex gap-3 justify-center">
+              <a href="#" target="_blank" class="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition">Live Demo</a>
+              <a href="#" target="_blank" class="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition">GitHub</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="bg-gray-900 border border-gray-700 rounded-lg overflow-hidden hover:scale-105 hover:shadow-xl hover:shadow-white/20 transition">
-        <img src="project2.png" alt="Business Landing Screenshot" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-semibold">Business Landing Page</h3>
-          <p class="text-gray-400 mt-2">Clean corporate landing page with scroll effects.</p>
+
+      <!-- Project 2 - Landing Page -->
+      <div class="relative group overflow-hidden rounded-lg border border-gray-700 bg-gray-900">
+        <img src="assets/futuristic-landing-page-background-with-gradient-mesh-website-ui-design-vector.jpg" alt="Business Landing Page Screenshot" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
+        <div class="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+          <div class="text-center text-white px-4">
+            <h3 class="text-xl font-semibold">Business Landing Page</h3>
+            <p class="mt-2">Clean corporate landing page with scroll effects.</p>
+            <div class="mt-4 flex gap-3 justify-center">
+              <a href="#" target="_blank" class="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition">Live Demo</a>
+              <a href="#" target="_blank" class="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition">GitHub</a>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="bg-gray-900 border border-gray-700 rounded-lg overflow-hidden hover:scale-105 hover:shadow-xl hover:shadow-white/20 transition">
-        <img src="project3.png" alt="E-commerce UI Screenshot" class="w-full h-48 object-cover">
-        <div class="p-6">
-          <h3 class="text-xl font-semibold">E-commerce UI</h3>
-          <p class="text-gray-400 mt-2">Elegant shopping UI with hover animations.</p>
+
+      <!-- Project 3 - E-commerce -->
+      <div class="relative group overflow-hidden rounded-lg border border-gray-700 bg-gray-900">
+        <img src="assets/3b9ef354-1859-418e-b6bb-a03ab8bda8da-cover.png" alt="E-commerce UI Screenshot" class="w-full h-48 object-cover group-hover:scale-110 transition duration-500">
+        <div class="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition duration-500">
+          <div class="text-center text-white px-4">
+            <h3 class="text-xl font-semibold">E-commerce UI</h3>
+            <p class="mt-2">Elegant shopping UI with hover animations.</p>
+            <div class="mt-4 flex gap-3 justify-center">
+              <a href="#" target="_blank" class="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition">Live Demo</a>
+              <a href="#" target="_blank" class="px-4 py-2 bg-white text-black rounded-lg hover:bg-gray-200 transition">GitHub</a>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 
@@ -79,20 +147,32 @@
   <section id="certificates" class="py-20 bg-gray-900 px-6">
     <h2 class="text-4xl font-bold mb-6 text-center">Certificates</h2>
     <div class="grid md:grid-cols-3 gap-8">
-      <div class="bg-black border border-gray-700 rounded-lg p-4 fade-in text-center">
-        <img src="certificate1-preview.png" alt="Certificate 1" class="w-full h-48 object-contain mb-2 rounded-lg shadow-md">
-        <a href="https://github.com/username/repo-name/raw/main/certificate1.pdf" target="_blank" class="px-4 py-2 bg-white text-black rounded-lg hover:scale-105 transition">View PDF</a>
+
+      <div class="bg-black border border-gray-700 rounded-lg p-4 fade-in text-center cursor-pointer" onclick="openModal(0)">
+        <img src="assets/certificate1-preview.png" alt="HTML ADVANCE Certificate" class="w-full h-48 object-contain mb-2 rounded-lg shadow-md">
+        <span class="px-4 py-2 bg-white text-black rounded-lg hover:scale-105 transition inline-block">View PDF</span>
       </div>
-      <div class="bg-black border border-gray-700 rounded-lg p-4 fade-in text-center">
-        <img src="certificate2-preview.png" alt="Certificate 2" class="w-full h-48 object-contain mb-2 rounded-lg shadow-md">
-        <a href="https://github.com/username/repo-name/raw/main/certificate2.pdf" target="_blank" class="px-4 py-2 bg-white text-black rounded-lg hover:scale-105 transition">View PDF</a>
+
+      <div class="bg-black border border-gray-700 rounded-lg p-4 fade-in text-center cursor-pointer" onclick="openModal(1)">
+        <img src="assets/certificate2-preview.png" alt="HTML AND CSS Certificate" class="w-full h-48 object-contain mb-2 rounded-lg shadow-md">
+        <span class="px-4 py-2 bg-white text-black rounded-lg hover:scale-105 transition inline-block">View PDF</span>
       </div>
-      <div class="bg-black border border-gray-700 rounded-lg p-4 fade-in text-center">
-        <img src="certificate3-preview.png" alt="Certificate 3" class="w-full h-48 object-contain mb-2 rounded-lg shadow-md">
-        <a href="https://github.com/username/repo-name/raw/main/certificate3.pdf" target="_blank" class="px-4 py-2 bg-white text-black rounded-lg hover:scale-105 transition">View PDF</a>
+
+      <div class="bg-black border border-gray-700 rounded-lg p-4 fade-in text-center cursor-pointer" onclick="openModal(2)">
+        <img src="assets/certificate3-preview.png" alt="Landing Page Design Certificate" class="w-full h-48 object-contain mb-2 rounded-lg shadow-md">
+        <span class="px-4 py-2 bg-white text-black rounded-lg hover:scale-105 transition inline-block">View PDF</span>
       </div>
+
     </div>
   </section>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <iframe id="modalContent"></iframe>
+    <button onclick="prevCertificate()" class="absolute left-5 top-1/2 text-white text-3xl">❮</button>
+    <button onclick="nextCertificate()" class="absolute right-5 top-1/2 text-white text-3xl">❯</button>
+  </div>
 
   <!-- Contact Section -->
   <section id="contact" class="py-20 bg-black text-center fade-in">
@@ -106,18 +186,62 @@
     © 2025 K M VENKATACHALAM. All Rights Reserved.
   </footer>
 
-  <!-- Scroll Animation Script -->
+  <!-- Scripts -->
   <script>
+    // Scroll animations
     const faders = document.querySelectorAll('.fade-in, .zoom-in');
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add('visible');
-      });
+      entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.2 });
     faders.forEach(fader => observer.observe(fader));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e){
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+
+    // Skill bars animation
+    const skills = document.querySelectorAll('.skill-bar');
+    window.addEventListener('scroll', () => {
+      skills.forEach(skill => {
+        let rect = skill.getBoundingClientRect();
+        if(rect.top < window.innerHeight){
+          skill.style.width = skill.getAttribute('data-skill');
+        }
+      });
+    });
+
+    // Certificates modal
+    let certificates = [
+      'assets/HTML ADVANCE.pdf',
+      'assets/HTML AND CSS.pdf',
+      'assets/Landing Page Design.pdf'
+    ];
+    let currentIndex = 0;
+
+    function openModal(index){
+      currentIndex = index;
+      document.getElementById('modal').style.display = 'block';
+      document.getElementById('modalContent').src = certificates[currentIndex];
+    }
+    function closeModal(){
+      document.getElementById('modal').style.display = 'none';
+      document.getElementById('modalContent').src = '';
+    }
+    function nextCertificate(){
+      currentIndex = (currentIndex + 1) % certificates.length;
+      document.getElementById('modalContent').src = certificates[currentIndex];
+    }
+    function prevCertificate(){
+      currentIndex = (currentIndex - 1 + certificates.length) % certificates.length;
+      document.getElementById('modalContent').src = certificates[currentIndex];
+    }
   </script>
 
-  <!-- Lottie Script for Anime Boy -->
+  <!-- Lottie Animation -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
   <script>
     lottie.loadAnimation({
@@ -128,5 +252,6 @@
       path: 'animeBoy.json' // replace with your Lottie JSON file path
     });
   </script>
+
 </body>
 </html>
