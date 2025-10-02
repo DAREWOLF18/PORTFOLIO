@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animated Portfolio - K M VENKATACHALAM</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-  <style>
-    body, html { margin:0; padding:0; font-family:sans-serif; overflow-x:hidden; }
-    body { 
-      background: linear-gradient(270deg, #0f0c29, #302b63, #24243e); 
-      background-size: 600% 600%; 
-      animation: gradientBG 20s ease infinite; 
-      color:white; 
-    }
-    @keyframes gradientBG {
-      0%{background-position:0% 50%}
-      50%{background-position:100% 50%}
-      100%{background-position:0% 50%}
-    }
-    .typing { border-right:2px solid white; white-space:nowrap; overflow:hidden; animation:typing 3s steps(30,end),blink 0.6s infinite; }
-    @keyframes typing { from{width:0;} to{width:100%;} }
-    @keyframes blink { 50%{border-color:transparent;} }
-    .fade-in { opacity:0; transform:translateY(30px); transition:all 1s ease; }
-    .fade-in.visible { opacity:1; transform:translateY(0); }
-    .project-card { transition: transform 0.3s, box-shadow 0.3s, background-color 0.5s; border-radius: 12px; }
-    .project-card:hover { transform: scale(1.05) rotate(2deg); box-shadow:0 0 20px white; background-color: rgba(255,255,255,0.05); }
-    .skill-bar { width:0%; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K M VENKATACHALAM</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
+<style>
+  body, html { margin:0; padding:0; font-family:sans-serif; overflow-x:hidden; }
+  body { 
+    background: linear-gradient(270deg, #0f0c29, #302b63, #24243e); 
+    background-size: 600% 600%; 
+    animation: gradientBG 20s ease infinite; 
+    color:white; 
+  }
+  @keyframes gradientBG { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+  .typing { border-right:2px solid white; white-space:nowrap; overflow:hidden; animation:typing 3s steps(30,end),blink 0.6s infinite; }
+  @keyframes typing { from{width:0;} to{width:100%;} }
+  @keyframes blink { 50%{border-color:transparent;} }
+  .fade-in { opacity:0; transform:translateY(30px); transition:all 1s ease; }
+  .fade-in.visible { opacity:1; transform:translateY(0); }
+  .project-card { transition: transform 0.3s, box-shadow 0.3s, background-color 0.5s; border-radius: 12px; }
+  .project-card:hover { transform: scale(1.05) rotate(2deg); box-shadow:0 0 20px white; background-color: rgba(255,255,255,0.05); }
+  .skill-bar { width:0%; }
+  #lottieCoding { width: 300px; max-width:40%; margin:0 auto; }
+  @media(min-width:768px){ #lottieCoding { margin:0; } }
+  #cursor { width:10px; height:10px; border-radius:50%; background:white; position:fixed; pointer-events:none; z-index:50; transition: transform 0.05s ease; }
+</style>
 </head>
 <body>
 
+<!-- Cursor -->
+<div id="cursor"></div>
+
 <!-- Hero Section -->
-<section class="h-screen flex flex-col items-center justify-center text-center px-6">
-  <h1 class="text-6xl font-bold mb-4">Hi, I’m <span class="text-gray-300">K M VENKATACHALAM</span></h1>
-  <p class="text-2xl mb-6 typing">Freelance Web Designer & Developer</p>
-  <a href="#projects" class="px-8 py-3 bg-white text-black font-semibold rounded-lg shadow-lg hover:shadow-white/50 hover:scale-110 transition">View My Work</a>
+<section class="h-screen flex flex-col md:flex-row items-center justify-center text-center md:text-left px-6 gap-10">
+  <div>
+    <h1 class="text-6xl font-bold mb-4">Hi, I’m <span class="text-gray-300">K M VENKATACHALAM</span></h1>
+    <p class="text-2xl mb-6 typing">Freelance Web Designer & Developer</p>
+    <a href="#projects" class="px-8 py-3 bg-white text-black font-semibold rounded-lg shadow-lg hover:shadow-white/50 hover:scale-110 transition">View My Work</a>
+  </div>
+  <div id="lottieCoding"></div>
 </section>
 
 <!-- About Section -->
@@ -124,6 +130,30 @@
 </footer>
 
 <script>
+  // Lottie Animation with dark-blue/black/white theme
+  fetch('assets/coding-boy.json')
+    .then(res => res.json())
+    .then(animationData => {
+      animationData.layers.forEach(layer => {
+        if(layer.shapes){
+          layer.shapes.forEach(shape => {
+            if(shape.it){
+              shape.it.forEach(itm => {
+                if(itm.c) itm.c.k = [0/255,50/255,100/255,1]; // dark blue
+              });
+            }
+          });
+        }
+      });
+      lottie.loadAnimation({
+        container: document.getElementById('lottieCoding'),
+        renderer: 'svg',
+        loop: true,
+        autoplay: true,
+        animationData: animationData
+      });
+    });
+
   // Fade-in on scroll
   const faders = document.querySelectorAll('.fade-in');
   const observer = new IntersectionObserver(entries => {
@@ -154,6 +184,23 @@
     });
   }, { threshold: 0.5 });
   skillBars.forEach(bar => skillObserver.observe(bar));
+
+  // Floating cursor animation
+  const cursor = document.getElementById('cursor');
+  const heroSection = document.querySelector('section');
+  const cursorObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        let x = 100, y = 300;
+        setInterval(() => {
+          x += Math.random()*10-5;
+          y += Math.random()*10-5;
+          cursor.style.transform = `translate(${x}px, ${y}px)`;
+        }, 100);
+      }
+    });
+  }, { threshold: 0.5 });
+  cursorObserver.observe(heroSection);
 </script>
 
 </body>
