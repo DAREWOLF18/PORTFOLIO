@@ -3,167 +3,83 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>3D Interactive Portfolio - K M VENKATACHALAM</title>
+  <title>K M VENKATACHALAM</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
   <style>
-    body,html{margin:0;padding:0;overflow-x:hidden;background:#000;color:white;font-family:sans-serif;}
-    #canvas-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;}
-    section{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;}
-    h1,h2,p,a{z-index:10;position:relative;}
+    body{margin:0;padding:0;background:#000;color:white;font-family:sans-serif;}
     .typing{border-right:2px solid white;white-space:nowrap;overflow:hidden;animation:typing 3s steps(30,end),blink 0.6s infinite;}
     @keyframes typing{from{width:0;}to{width:100%;}}
     @keyframes blink{50%{border-color:transparent;}}
-    .project-card:hover{transform: scale(1.05);}
+    .fade-in{opacity:0;transform:translateY(30px);transition:all 1s ease;}
+    .fade-in.visible{opacity:1;transform:translateY(0);}
+    .project-card{transition:transform 0.3s, box-shadow 0.3s;}
+    .project-card:hover{transform:scale(1.05);box-shadow:0 0 15px white;}
   </style>
 </head>
 <body>
 
-<div id="canvas-container"></div>
-
 <!-- Hero Section -->
-<section id="hero">
+<section class="h-screen flex flex-col items-center justify-center text-center">
   <h1 class="text-6xl font-bold mb-4">Hi, I’m <span class="text-gray-400">K M VENKATACHALAM</span></h1>
   <p class="text-2xl mb-6 typing">Freelance Web Designer</p>
-  <a id="view-work-btn" href="#projects" class="px-8 py-3 bg-white text-black font-semibold rounded-lg shadow-lg hover:shadow-white/50 hover:scale-110 transition">View My Work</a>
+  <a href="#projects" class="px-8 py-3 bg-white text-black font-semibold rounded-lg shadow-lg hover:shadow-white/50 hover:scale-110 transition">View My Work</a>
 </section>
 
 <!-- About Section -->
-<section id="about" class="bg-gray-900 px-6">
-  <h2 class="text-4xl font-bold mb-6">About Me</h2>
-  <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+<section id="about" class="py-20 px-6 max-w-4xl mx-auto fade-in">
+  <h2 class="text-4xl font-bold mb-6 text-center">About Me</h2>
+  <p class="text-lg text-gray-300 text-center">
     I create elegant, responsive websites with a focus on user experience and modern design. My style blends minimalism with smooth animations to bring websites alive.
   </p>
 </section>
 
 <!-- Skills Section -->
-<section id="skills" class="px-6">
-  <h2 class="text-4xl font-bold mb-6">Skills</h2>
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
-    <div><span>HTML</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="95%"></div></div></div>
-    <div><span>CSS</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="90%"></div></div></div>
-    <div><span>JavaScript</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="85%"></div></div></div>
-    <div><span>Tailwind</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="80%"></div></div></div>
-    <div><span>React</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="75%"></div></div></div>
-    <div><span>UI/UX</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="85%"></div></div></div>
+<section id="skills" class="py-20 bg-gray-900 px-6 fade-in">
+  <h2 class="text-4xl font-bold mb-6 text-center">Skills</h2>
+  <div class="grid grid-cols-2 sm:grid-cols-3 gap-6 text-center">
+    <div class="p-6 bg-black border border-gray-700 rounded-lg">HTML</div>
+    <div class="p-6 bg-black border border-gray-700 rounded-lg">CSS</div>
+    <div class="p-6 bg-black border border-gray-700 rounded-lg">JavaScript</div>
+    <div class="p-6 bg-black border border-gray-700 rounded-lg">Tailwind</div>
+    <div class="p-6 bg-black border border-gray-700 rounded-lg">React</div>
+    <div class="p-6 bg-black border border-gray-700 rounded-lg">UI/UX</div>
   </div>
 </section>
 
 <!-- Projects Section -->
-<section id="projects" class="px-6">
-  <h2 class="text-4xl font-bold mb-6">Projects</h2>
+<section id="projects" class="py-20 px-6 max-w-6xl mx-auto fade-in">
+  <h2 class="text-4xl font-bold mb-6 text-center">Projects</h2>
   <div class="grid md:grid-cols-3 gap-8">
-    <div class="project-card rounded-lg border border-gray-700 bg-gray-900 overflow-hidden">
+    <div class="project-card bg-gray-900 border border-gray-700 rounded-lg overflow-hidden">
       <img src="assets/Screenshot 2025-10-02 114425.png" class="w-full h-48 object-cover">
     </div>
-    <div class="project-card rounded-lg border border-gray-700 bg-gray-900 overflow-hidden">
+    <div class="project-card bg-gray-900 border border-gray-700 rounded-lg overflow-hidden">
       <img src="assets/futuristic-landing-page-background-with-gradient-mesh-website-ui-design-vector.jpg" class="w-full h-48 object-cover">
     </div>
-    <div class="project-card rounded-lg border border-gray-700 bg-gray-900 overflow-hidden">
+    <div class="project-card bg-gray-900 border border-gray-700 rounded-lg overflow-hidden">
       <img src="assets/3b9ef354-1859-418e-b6bb-a03ab8bda8da-cover.png" class="w-full h-48 object-cover">
     </div>
   </div>
 </section>
 
 <!-- Contact Section -->
-<section id="contact" class="bg-gray-900">
+<section id="contact" class="py-20 bg-black text-center fade-in">
   <h2 class="text-4xl font-bold mb-6">Contact Me</h2>
   <p class="mb-4 text-gray-300">Let’s work together! Reach me at:</p>
   <a href="mailto:venkatkm18@gmail.com" class="px-8 py-3 bg-white text-black font-semibold rounded-lg shadow-lg hover:shadow-white/50 hover:scale-110 transition">Email Me</a>
 </section>
 
-<footer class="py-6 text-center bg-black text-gray-500">
+<footer class="py-6 text-center bg-gray-900 text-gray-500">
   © 2025 K M VENKATACHALAM. All Rights Reserved.
 </footer>
 
-<!-- Scripts -->
-<script type="module">
-import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
-import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/loaders/GLTFLoader.js';
-import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/controls/OrbitControls.js';
-import { gsap } from 'https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js';
-import { ScrollTrigger } from 'https://cdn.jsdelivr.net/npm/gsap@3.14.1/ScrollTrigger.min.js';
-
-gsap.registerPlugin(ScrollTrigger);
-
-const container = document.getElementById('canvas-container');
-const scene = new THREE.Scene();
-scene.background = new THREE.Color(0x000000);
-
-// Camera
-const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 100);
-camera.position.set(0,1.5,5);
-
-// Renderer
-const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
-renderer.setSize(window.innerWidth, window.innerHeight);
-container.appendChild(renderer.domElement);
-
-// Controls (optional)
-const controls = new OrbitControls(camera, renderer.domElement);
-controls.enablePan=false;
-controls.enableZoom=false;
-controls.enableRotate=false;
-
-// Lights
-scene.add(new THREE.AmbientLight(0xffffff,0.7));
-const dirLight = new THREE.DirectionalLight(0xffffff,0.8);
-dirLight.position.set(5,10,7);
-scene.add(dirLight);
-
-// Load Hero Boy (idle + coding + waving animation)
-const loader = new GLTFLoader();
-let heroBoy;
-loader.load('assets/models/boy-coding.glb', gltf=>{
-  heroBoy = gltf.scene;
-  heroBoy.scale.set(1.5,1.5,1.5);
-  heroBoy.position.set(0,0,0);
-  scene.add(heroBoy);
-});
-
-// Hero reacts to mouse movement
-document.addEventListener('mousemove', e=>{
-  if(heroBoy){
-    const x = (e.clientX/window.innerWidth - 0.5)*2;
-    heroBoy.rotation.y = x * 0.5;
-  }
-});
-
-// Hero types animation when hovering button
-const viewWorkBtn = document.getElementById('view-work-btn');
-viewWorkBtn.addEventListener('mouseenter', ()=>{
-  if(heroBoy) gsap.to(heroBoy.rotation, {y:0, duration:0.5}); // rotate straight
-});
-viewWorkBtn.addEventListener('mouseleave', ()=>{
-  if(heroBoy) gsap.to(heroBoy.rotation, {y:0, duration:0.5});
-});
-
-// Scroll-triggered camera movement
-gsap.to(camera.position, {
-  y:3, z:10,
-  scrollTrigger:{
-    trigger:"#projects",
-    start:"top bottom",
-    end:"bottom top",
-    scrub:true
-  }
-});
-
-// Animate scene
-const clock = new THREE.Clock();
-function animate(){
-  requestAnimationFrame(animate);
-  const elapsed = clock.getElapsedTime();
-  if(heroBoy) heroBoy.rotation.y += Math.sin(elapsed/2)*0.002; // idle sway
-  renderer.render(scene,camera);
-}
-animate();
-
-// Responsive
-window.addEventListener('resize', ()=>{
-  camera.aspect = window.innerWidth/window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-});
+<script>
+  const faders = document.querySelectorAll('.fade-in');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.2 });
+  faders.forEach(fader => observer.observe(fader));
 </script>
 
 </body>
