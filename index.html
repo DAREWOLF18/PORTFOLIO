@@ -19,10 +19,10 @@
     .zoom-in.visible { opacity: 1; transform: scale(1); }
 
     /* Modal */
-    .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); }
-    .modal-content { margin: 10% auto; display: block; width: 80%; max-width: 800px; }
-    .close { position: absolute; top: 20px; right: 40px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; }
-    .modal-content iframe { width: 100%; height: 80vh; border: none; }
+    .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.95); }
+    .modal-content { margin: 0 auto; display: block; width: 90%; height: 95vh; }
+    .close { position: absolute; top: 20px; right: 40px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 60; }
+    .modal-content iframe { width: 100%; height: 100%; border: none; }
 
     /* Skill bar animation */
     .skill-bar { width: 0%; height: 1rem; background-color: white; border-radius: 0.25rem; transition: width 1.5s ease-in-out; }
@@ -34,7 +34,7 @@
       100% { background-position: 0% 50%; }
     }
     .animate-gradientBackground {
-      background: linear-gradient(270deg, #6B46C1, #D53F8C, #ED64A6);
+      background: linear-gradient(270deg, #1E3A8A, #000000, #ffffff);
       background-size: 400% 400%;
       animation: gradientBackground 15s ease infinite;
     }
@@ -147,22 +147,18 @@
   <section id="certificates" class="py-20 bg-gray-900 px-6">
     <h2 class="text-4xl font-bold mb-6 text-center">Certificates</h2>
     <div class="grid md:grid-cols-3 gap-8">
-
       <div class="bg-black border border-gray-700 rounded-lg p-4 fade-in text-center cursor-pointer" onclick="openModal(0)">
         <img src="assets/certificate1-preview.png" alt="HTML ADVANCE Certificate" class="w-full h-48 object-contain mb-2 rounded-lg shadow-md">
         <span class="px-4 py-2 bg-white text-black rounded-lg hover:scale-105 transition inline-block">View PDF</span>
       </div>
-
       <div class="bg-black border border-gray-700 rounded-lg p-4 fade-in text-center cursor-pointer" onclick="openModal(1)">
         <img src="assets/certificate2-preview.png" alt="HTML AND CSS Certificate" class="w-full h-48 object-contain mb-2 rounded-lg shadow-md">
         <span class="px-4 py-2 bg-white text-black rounded-lg hover:scale-105 transition inline-block">View PDF</span>
       </div>
-
       <div class="bg-black border border-gray-700 rounded-lg p-4 fade-in text-center cursor-pointer" onclick="openModal(2)">
         <img src="assets/certificate3-preview.png" alt="Landing Page Design Certificate" class="w-full h-48 object-contain mb-2 rounded-lg shadow-md">
         <span class="px-4 py-2 bg-white text-black rounded-lg hover:scale-105 transition inline-block">View PDF</span>
       </div>
-
     </div>
   </section>
 
@@ -249,7 +245,7 @@
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      path: 'animeBoy.json' // replace with your Lottie JSON file path
+      path: 'animeBoy-darkblue.json' // Replace with your dark blue/black/white Lottie JSON file
     });
   </script>
 
