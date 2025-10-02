@@ -1,151 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio - K M VENKATACHALAM</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Interactive Portfolio - K M VENKATACHALAM</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />
   <style>
-    body { margin: 0; }
-    /* Typing effect */
-    .typing { border-right: 2px solid white; white-space: nowrap; overflow: hidden; animation: typing 3s steps(30, end), blink 0.6s infinite; }
-    @keyframes typing { from { width: 0 } to { width: 100% } }
-    @keyframes blink { 50% { border-color: transparent } }
-
-    /* Scroll animations */
-    .fade-in { opacity: 0; transform: translateY(30px); transition: all 1s ease; }
-    .fade-in.visible { opacity: 1; transform: translateY(0); }
-    .zoom-in { opacity: 0; transform: scale(0.9); transition: all 1s ease; }
-    .zoom-in.visible { opacity: 1; transform: scale(1); }
-
-    /* Modal */
-    .modal { display: none; position: fixed; z-index: 50; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.95); align-items: center; justify-content: center; flex-direction: column; }
-    .close { position: absolute; top: 20px; right: 40px; color: white; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 60; }
-    #pdfCanvas { border-radius: 8px; cursor: grab; }
-
-    /* Skill bar animation */
-    .skill-bar { width: 0%; height: 1rem; background-color: white; border-radius: 0.25rem; transition: width 1.5s ease-in-out; }
-
-    /* Gradient background for hero */
-    @keyframes gradientBackground { 0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;} }
-    .animate-gradientBackground { background: linear-gradient(270deg,#1E3A8A,#000000,#ffffff); background-size: 400% 400%; animation: gradientBackground 15s ease infinite; }
+    body,html{margin:0;padding:0;overflow-x:hidden;background:#000;color:white;font-family:sans-serif;}
+    #canvas-container{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;}
+    section{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;}
+    h1,h2,p,a{z-index:10;position:relative;}
+    .typing{border-right:2px solid white;white-space:nowrap;overflow:hidden;animation:typing 3s steps(30,end),blink 0.6s infinite;}
+    @keyframes typing{from{width:0;}to{width:100%;}}
+    @keyframes blink{50%{border-color:transparent;}}
+    .project-card:hover{transform: scale(1.05);}
   </style>
 </head>
-<body class="bg-black text-white font-sans">
+<body>
 
-  <!-- Hero Section -->
-  <section class="h-screen flex flex-col items-center justify-center text-center relative overflow-hidden">
-    <div class="absolute inset-0 animate-gradientBackground -z-10"></div>
-    <div id="animeBoy" class="absolute bottom-0 right-10 w-40 animate__animated animate__bounceIn"></div>
-    <h1 class="text-6xl font-extrabold mb-4">Hi, I’m <span class="text-gray-400">K M VENKATACHALAM</span></h1>
-    <p class="text-2xl mb-6 typing">Freelance Web Designer</p>
-    <a href="#projects" class="px-8 py-3 bg-white text-black font-semibold rounded-lg shadow-lg hover:shadow-white/50 hover:scale-110 transition">View My Work</a>
-  </section>
+<div id="canvas-container"></div>
 
-  <!-- About, Skills, Projects sections (same as before) -->
-  <!-- ... -->
+<!-- Hero Section -->
+<section id="hero">
+  <h1 class="text-6xl font-bold mb-4">Hi, I’m <span class="text-gray-400">K M VENKATACHALAM</span></h1>
+  <p class="text-2xl mb-6 typing">Freelance Web Designer</p>
+  <a id="view-work-btn" href="#projects" class="px-8 py-3 bg-white text-black font-semibold rounded-lg shadow-lg hover:shadow-white/50 hover:scale-110 transition">View My Work</a>
+</section>
 
-  <!-- Certificates Section -->
-  <section id="certificates" class="py-20 bg-gray-900 px-6">
-    <h2 class="text-4xl font-bold mb-6 text-center">Certificates</h2>
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="cursor-pointer" onclick="openModal(0)">
-        <img src="assets/certificate1-preview.png" class="w-full h-48 object-contain rounded-lg shadow-md">
-        <span class="block mt-2 text-center bg-white text-black px-4 py-2 rounded-lg">View PDF</span>
-      </div>
-      <div class="cursor-pointer" onclick="openModal(1)">
-        <img src="assets/certificate2-preview.png" class="w-full h-48 object-contain rounded-lg shadow-md">
-        <span class="block mt-2 text-center bg-white text-black px-4 py-2 rounded-lg">View PDF</span>
-      </div>
-      <div class="cursor-pointer" onclick="openModal(2)">
-        <img src="assets/certificate3-preview.png" class="w-full h-48 object-contain rounded-lg shadow-md">
-        <span class="block mt-2 text-center bg-white text-black px-4 py-2 rounded-lg">View PDF</span>
-      </div>
+<!-- About Section -->
+<section id="about" class="bg-gray-900 px-6">
+  <h2 class="text-4xl font-bold mb-6">About Me</h2>
+  <p class="text-lg text-gray-300 max-w-3xl mx-auto">
+    I create elegant, responsive websites with a focus on user experience and modern design. My style blends minimalism with smooth animations to bring websites alive.
+  </p>
+</section>
+
+<!-- Skills Section -->
+<section id="skills" class="px-6">
+  <h2 class="text-4xl font-bold mb-6">Skills</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-2xl mx-auto">
+    <div><span>HTML</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="95%"></div></div></div>
+    <div><span>CSS</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="90%"></div></div></div>
+    <div><span>JavaScript</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="85%"></div></div></div>
+    <div><span>Tailwind</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="80%"></div></div></div>
+    <div><span>React</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="75%"></div></div></div>
+    <div><span>UI/UX</span><div class="w-full bg-gray-700 rounded h-4 mt-1"><div class="skill-bar" data-skill="85%"></div></div></div>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="px-6">
+  <h2 class="text-4xl font-bold mb-6">Projects</h2>
+  <div class="grid md:grid-cols-3 gap-8">
+    <div class="project-card rounded-lg border border-gray-700 bg-gray-900 overflow-hidden">
+      <img src="assets/Screenshot 2025-10-02 114425.png" class="w-full h-48 object-cover">
     </div>
-  </section>
-
-  <!-- Certificate Modal -->
-  <div id="modal" class="modal flex">
-    <span class="close" onclick="closeModal()">&times;</span>
-    <canvas id="pdfCanvas"></canvas>
-    <div class="mt-4 flex gap-4">
-      <button onclick="zoomIn()" class="px-4 py-2 bg-white text-black rounded-lg">Zoom In</button>
-      <button onclick="zoomOut()" class="px-4 py-2 bg-white text-black rounded-lg">Zoom Out</button>
+    <div class="project-card rounded-lg border border-gray-700 bg-gray-900 overflow-hidden">
+      <img src="assets/futuristic-landing-page-background-with-gradient-mesh-website-ui-design-vector.jpg" class="w-full h-48 object-cover">
+    </div>
+    <div class="project-card rounded-lg border border-gray-700 bg-gray-900 overflow-hidden">
+      <img src="assets/3b9ef354-1859-418e-b6bb-a03ab8bda8da-cover.png" class="w-full h-48 object-cover">
     </div>
   </div>
+</section>
 
-  <footer class="py-6 text-center bg-gray-900 text-gray-500">
-    © 2025 K M VENKATACHALAM. All Rights Reserved.
-  </footer>
+<!-- Contact Section -->
+<section id="contact" class="bg-gray-900">
+  <h2 class="text-4xl font-bold mb-6">Contact Me</h2>
+  <p class="mb-4 text-gray-300">Let’s work together! Reach me at:</p>
+  <a href="mailto:venkatkm18@gmail.com" class="px-8 py-3 bg-white text-black font-semibold rounded-lg shadow-lg hover:shadow-white/50 hover:scale-110 transition">Email Me</a>
+</section>
 
-  <!-- Scripts -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.14.305/pdf.min.js"></script>
-  <script>
-    // Lottie Anime Boy Coding
-    lottie.loadAnimation({
-      container: document.getElementById('animeBoy'),
-      renderer: 'svg',
-      loop: true,
-      autoplay: true,
-      path: 'animeBoyCoding-dark.json'
-    });
+<footer class="py-6 text-center bg-black text-gray-500">
+  © 2025 K M VENKATACHALAM. All Rights Reserved.
+</footer>
 
-    // Certificates PDF.js
-    const pdfFiles = [
-      'assets/HTML_ADVANCE.pdf',
-      'assets/HTML_AND_CSS.pdf',
-      'assets/Landing_Page_Design.pdf'
-    ];
-    let currentPDF = 0;
-    let pdfDoc = null;
-    let pageNum = 1;
-    let scale = 1.0;
-    const canvas = document.getElementById('pdfCanvas');
-    const ctx = canvas.getContext('2d');
-    let isDragging = false, startX, startY, offsetX=0, offsetY=0;
+<!-- Scripts -->
+<script type="module">
+import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.module.js';
+import { GLTFLoader } from 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/loaders/GLTFLoader.js';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.158.0/examples/jsm/controls/OrbitControls.js';
+import { gsap } from 'https://cdn.jsdelivr.net/npm/gsap@3.14.1/dist/gsap.min.js';
+import { ScrollTrigger } from 'https://cdn.jsdelivr.net/npm/gsap@3.14.1/ScrollTrigger.min.js';
 
-    function renderPage(num){
-      pdfDoc.getPage(num).then(function(page){
-        const viewport = page.getViewport({scale: scale});
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-        const renderContext = { canvasContext: ctx, viewport: viewport };
-        page.render(renderContext);
-      });
-    }
+gsap.registerPlugin(ScrollTrigger);
 
-    function openModal(index){
-      currentPDF = index;
-      document.getElementById('modal').style.display = 'flex';
-      pdfjsLib.getDocument(pdfFiles[currentPDF]).promise.then(pdf=>{
-        pdfDoc = pdf;
-        pageNum = 1;
-        scale = 1.0;
-        renderPage(pageNum);
-      });
-    }
+const container = document.getElementById('canvas-container');
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
 
-    function closeModal(){
-      document.getElementById('modal').style.display = 'none';
-      pdfDoc = null;
-    }
+// Camera
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth/window.innerHeight, 0.1, 100);
+camera.position.set(0,1.5,5);
 
-    function zoomIn(){ scale += 0.25; renderPage(pageNum); }
-    function zoomOut(){ scale = Math.max(0.5, scale-0.25); renderPage(pageNum); }
+// Renderer
+const renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+container.appendChild(renderer.domElement);
 
-    // Dragging
-    canvas.addEventListener('mousedown', e=>{ isDragging=true; startX=e.clientX; startY=e.clientY; canvas.style.cursor='grabbing'; });
-    canvas.addEventListener('mouseup', e=>{ isDragging=false; canvas.style.cursor='grab'; });
-    canvas.addEventListener('mousemove', e=>{
-      if(isDragging){
-        offsetX += e.clientX - startX;
-        offsetY += e.clientY - startY;
-        canvas.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(${scale})`;
-        startX=e.clientX; startY=e.clientY;
-      }
-    });
-  </script>
+// Controls (optional)
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enablePan=false;
+controls.enableZoom=false;
+controls.enableRotate=false;
+
+// Lights
+scene.add(new THREE.AmbientLight(0xffffff,0.7));
+const dirLight = new THREE.DirectionalLight(0xffffff,0.8);
+dirLight.position.set(5,10,7);
+scene.add(dirLight);
+
+// Load Hero Boy (idle + coding + waving animation)
+const loader = new GLTFLoader();
+let heroBoy;
+loader.load('assets/models/boy-coding.glb', gltf=>{
+  heroBoy = gltf.scene;
+  heroBoy.scale.set(1.5,1.5,1.5);
+  heroBoy.position.set(0,0,0);
+  scene.add(heroBoy);
+});
+
+// Hero reacts to mouse movement
+document.addEventListener('mousemove', e=>{
+  if(heroBoy){
+    const x = (e.clientX/window.innerWidth - 0.5)*2;
+    heroBoy.rotation.y = x * 0.5;
+  }
+});
+
+// Hero types animation when hovering button
+const viewWorkBtn = document.getElementById('view-work-btn');
+viewWorkBtn.addEventListener('mouseenter', ()=>{
+  if(heroBoy) gsap.to(heroBoy.rotation, {y:0, duration:0.5}); // rotate straight
+});
+viewWorkBtn.addEventListener('mouseleave', ()=>{
+  if(heroBoy) gsap.to(heroBoy.rotation, {y:0, duration:0.5});
+});
+
+// Scroll-triggered camera movement
+gsap.to(camera.position, {
+  y:3, z:10,
+  scrollTrigger:{
+    trigger:"#projects",
+    start:"top bottom",
+    end:"bottom top",
+    scrub:true
+  }
+});
+
+// Animate scene
+const clock = new THREE.Clock();
+function animate(){
+  requestAnimationFrame(animate);
+  const elapsed = clock.getElapsedTime();
+  if(heroBoy) heroBoy.rotation.y += Math.sin(elapsed/2)*0.002; // idle sway
+  renderer.render(scene,camera);
+}
+animate();
+
+// Responsive
+window.addEventListener('resize', ()=>{
+  camera.aspect = window.innerWidth/window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+
 </body>
 </html>
